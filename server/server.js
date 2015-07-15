@@ -11,9 +11,9 @@ var app = express();
 
 var router = new express.Router();
 //These seem unnecessary for our purposes
-//var usersRouter = new express.Router();
-//var reposRouter = new express.Router();
-//var commitsRouter = new express.Router();
+var usersRouter = new express.Router();
+var reposRouter = new express.Router();
+var commitsRouter = new express.Router();
 
 app.use(cors());
 app.use(morgan('dev'));
@@ -24,20 +24,20 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
 
 //ROUTES-------------------------
-app.get('/repos/:repoOwner/:repoName', reposController.getRepo);
-app.get('/repos/:repoOwner/:repoName/commits', commitsController.getCommits);
+// app.get('/repos/:repoOwner/:repoName', reposController.getRepo);
+// app.get('/repos/:repoOwner/:repoName/commits', commitsController.getCommits);
 //app.get('/:user/repos/:repo', reposController.getRepo); //get a user's repo with possible filters
 //app.get('/:user/repos', reposController.getRepos) //get a list of user's repos
 //app.get('/:user', usersController.getUser); //get a user
 //-------------------------------
 
-//app.use('/users', usersRouter);
-//app.use('/repos', reposRouter);
-//app.use('/commits', commitsRouter);
+app.use('/users', usersRouter);
+app.use('/repos', reposRouter);
+// app.use('/commits', commitsRouter);
 
-//require('./users/usersRoutes.js') (usersRouter);
-//require('./repos/reposRoutes.js') (reposRouter);
-//require('./commits/commitsRoutes.js') (commitsRouter);
+require('./users/usersRoutes.js') (usersRouter);
+require('./repos/reposRoutes.js') (reposRouter);
+// require('./commits/commitsRoutes.js') (commitsRouter);
 // require('db/events/commitsRoutes.js') (commitsRouter);
 
 // get commits with username and repo name
